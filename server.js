@@ -2,7 +2,7 @@ const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 
-// require("./models");
+require("./models");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -15,9 +15,8 @@ app.use(express.static("public"));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populate", {useNewUrlParser: true});
 
-// app.use(express.static("./routes/apiRoutes"));
-// app.use(express.static("./routes/htmlRoutes"));
-app.use(express.static("./routes"));
+app.use(require("./routes/apiRoutes"));
+app.use(require("./routes/htmlRoutes"));
 
 app.listen(PORT, () => {
     console.log(`App running on http://localhost:${PORT}`);
